@@ -1,0 +1,5 @@
+    Route53HostedZone:
+        DeletionPolicy: "Delete"
+        Type: "AWS::Route53::HostedZone"
+        Properties:
+            Name: !Sub "$to2.shop."

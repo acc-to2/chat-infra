@@ -1,0 +1,64 @@
+
+    ApiGatewayRestApi:
+        DeletionPolicy: "Delete"
+        Type: "AWS::ApiGateway::RestApi"
+        Properties:
+            Name: !Sub "$to2-jwks-api"
+            ApiKeySourceType: "HEADER"
+            Policy: !Sub "{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Effect\\\":\\\"Allow\\\",\\\"Principal\\\":\\\"*\\\",\\\"Action\\\":\\\"execute-api:Invoke\\\",\\\"Resource\\\":\\\"arn:aws:execute-api:${AWS::Region}:416536687282:0b2wl9sn20\\/*\\/*\\/*\\\",\\\"Condition\\\":{\\\"StringEquals\\\":{\\\"aws:SourceVpce\\\":\\\"vpce-09189c03a3c4149e4\\\"}}}]}"
+            EndpointConfiguration: 
+                Types: 
+                  - "PRIVATE"
+
+    ApiGatewayMethod:
+        DeletionPolicy: "Delete"
+        Type: "AWS::ApiGateway::Method"
+        Properties:
+            RestApiId: !Ref ApiGatewayRestApi
+            ResourceId: !Ref ApiGatewayResource
+            HttpMethod: "GET"
+            AuthorizationType: "NONE"
+            ApiKeyRequired: false
+            RequestParameters: {}
+            RequestModels: {}
+            MethodResponses: 
+              - 
+                ResponseModels: 
+                    "application/json": "Empty"
+                StatusCode: "200"
+            Integration: 
+                CacheNamespace: !Ref ApiGatewayResource
+                ContentHandling: "CONVERT_TO_TEXT"
+                IntegrationHttpMethod: "POST"
+                IntegrationResponses: 
+                  - 
+                    StatusCode: "200"
+                PassthroughBehavior: "WHEN_NO_MATCH"
+                TimeoutInMillis: 29000
+                Type: "AWS"
+                Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:416536687282:function:${LambdaFunction3}/invocations"
+
+    ApiGatewayStage:
+        DeletionPolicy: "Delete"
+        Type: "AWS::ApiGateway::Stage"
+        Properties:
+            StageName: "prod"
+            DeploymentId: !Ref ApiGatewayDeployment
+            RestApiId: !Ref ApiGatewayRestApi
+            CacheClusterEnabled: false
+            CacheClusterSize: "0.5"
+            TracingEnabled: false
+
+    ApiGatewayDeployment:
+        DeletionPolicy: "Delete"
+        Type: "AWS::ApiGateway::Deployment"
+        Properties:
+            RestApiId: !Ref ApiGatewayRestApi
+
+    ApiGatewayResource:
+        DeletionPolicy: "Delete"
+        Type: "AWS::ApiGateway::Resource"
+        Properties:
+            RestApiId: !Ref ApiGatewayRestApi
+            PathPart: "jwks"
+            ParentId: !GetAtt ApiGatewayRestApi.RootResourceId

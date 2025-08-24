@@ -1,0 +1,364 @@
+    EC2NetworkInterface:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0bd18f6e2d782fd3b"
+            PrivateIpAddress: "10.22.102.105"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.105"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface2:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0a50aa33af5d6897b"
+            PrivateIpAddress: "10.22.102.15"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.15"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface3:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "Amazon MQ network interface for broker b-4d931a7d-6e95-4b20-99ee-5b7ef9f36770"
+            PrivateIpAddress: "10.22.102.248"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.248"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup3
+
+    EC2NetworkInterface4:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0c45b03e347fb871a"
+            PrivateIpAddress: "10.22.102.119"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.119"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface5:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0066220fb2c274688"
+            PrivateIpAddress: "10.22.102.52"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.52"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface6:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-09189c03a3c4149e4"
+            PrivateIpAddress: "10.22.102.154"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.154"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface7:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-05ea5b4053538444d"
+            PrivateIpAddress: "10.22.102.104"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.104"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface8:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0a8c591a044ab9696"
+            PrivateIpAddress: "10.22.102.149"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.149"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup3
+
+    EC2NetworkInterface9:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0610a31e1cd7abff6"
+            PrivateIpAddress: "10.22.102.188"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.188"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface10:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: !Sub "ELB app/${ElasticLoadBalancingV2LoadBalancer.LoadBalancerName}/f480be342bfa447e"
+            PrivateIpAddress: "10.22.2.56"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.2.56"
+                Primary: true
+            SubnetId: !Ref EC2Subnet2
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup
+
+    EC2NetworkInterface11:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: !Sub "arn:aws:ecs:${AWS::Region}:416536687282:attachment/d19b1c50-a709-42a7-bba9-ea2d794e96ae"
+            PrivateIpAddress: "10.22.102.159"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.159"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            Tags: 
+              - 
+                Key: "aws:ecs:serviceName"
+                Value: !GetAtt ECSService.Name
+              - 
+                Key: "aws:ecs:clusterName"
+                Value: !Ref ECSCluster
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface12:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0b15a80500c26e1f9"
+            PrivateIpAddress: "10.22.102.60"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.102.60"
+                Primary: true
+            SubnetId: !Ref EC2Subnet4
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface13:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0a50aa33af5d6897b"
+            PrivateIpAddress: "10.22.101.223"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.223"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface14:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0610a31e1cd7abff6"
+            PrivateIpAddress: "10.22.101.165"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.165"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface15:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0066220fb2c274688"
+            PrivateIpAddress: "10.22.101.164"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.164"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface16:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "Amazon MQ network interface for broker b-4d931a7d-6e95-4b20-99ee-5b7ef9f36770"
+            PrivateIpAddress: "10.22.101.250"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.250"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup3
+
+    EC2NetworkInterface17:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0b15a80500c26e1f9"
+            PrivateIpAddress: "10.22.101.67"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.67"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface18:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-09189c03a3c4149e4"
+            PrivateIpAddress: "10.22.101.60"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.60"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface19:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0c45b03e347fb871a"
+            PrivateIpAddress: "10.22.101.71"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.71"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface20:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0a8c591a044ab9696"
+            PrivateIpAddress: "10.22.101.246"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.246"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup3
+
+    EC2NetworkInterface21:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: !Sub "Interface for NAT Gateway ${EC2NatGateway}"
+            PrivateIpAddress: "10.22.1.166"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.1.166"
+                Primary: true
+            SubnetId: !Ref EC2Subnet
+            SourceDestCheck: false
+
+    EC2NetworkInterface22:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: !Sub "ELB app/${ElasticLoadBalancingV2LoadBalancer.LoadBalancerName}/f480be342bfa447e"
+            PrivateIpAddress: "10.22.1.129"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.1.129"
+                Primary: true
+            SubnetId: !Ref EC2Subnet
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup
+
+    EC2NetworkInterface23:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-0bd18f6e2d782fd3b"
+            PrivateIpAddress: "10.22.101.29"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.29"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2
+
+    EC2NetworkInterface24:
+        DeletionPolicy: "Delete"
+        Type: "AWS::EC2::NetworkInterface"
+        Properties:
+            Description: "VPC Endpoint Interface vpce-05ea5b4053538444d"
+            PrivateIpAddress: "10.22.101.149"
+            PrivateIpAddresses: 
+              - 
+                PrivateIpAddress: "10.22.101.149"
+                Primary: true
+            SubnetId: !Ref EC2Subnet3
+            SourceDestCheck: true
+            GroupSet: 
+              - !Ref EC2SecurityGroup2

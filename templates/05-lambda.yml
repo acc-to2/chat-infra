@@ -1,0 +1,65 @@
+    LambdaFunction:
+        DeletionPolicy: "Delete"
+        Type: "AWS::Lambda::Function"
+        Properties:
+            Description: ""
+            FunctionName: !Sub "$to2-updateUser"
+            Handler: "index.handler"
+            Architectures: 
+              - "x86_64"
+            Code: 
+                S3Bucket: "awslambda-ap-ne-2-tasks"
+                S3Key: !Sub "/snapshots/416536687282/$to2-updateUser-7f1bd7e5-ee51-41d6-860e-0daf50aa410d"
+                S3ObjectVersion: "x1FhPPKwR6hDhiCqmw_QBNs2wtKJDS5h"
+            MemorySize: 128
+            Role: !Sub "arn:aws:iam::416536687282:role/service-role/$to2-lambda"
+            Runtime: "nodejs18.x"
+            Timeout: 3
+            TracingConfig: 
+                Mode: "PassThrough"
+            EphemeralStorage: 
+                Size: 512
+
+    LambdaFunction2:
+        DeletionPolicy: "Delete"
+        Type: "AWS::Lambda::Function"
+        Properties:
+            Description: ""
+            FunctionName: !Sub "$to2-access-token-email"
+            Handler: "index.handler"
+            Architectures: 
+              - "x86_64"
+            Code: 
+                S3Bucket: "awslambda-ap-ne-2-tasks"
+                S3Key: !Sub "/snapshots/416536687282/$to2-access-token-email-fb1d2afe-6edf-465b-bb9a-eb1889ab15ff"
+                S3ObjectVersion: "Nb_f47FrZjIJGAFprNuD5HrHbCqy7vZy"
+            MemorySize: 128
+            Role: !Sub "arn:aws:iam::416536687282:role/service-role/$to2-access-token-email-role-ijjkxolt"
+            Runtime: "nodejs18.x"
+            Timeout: 3
+            TracingConfig: 
+                Mode: "PassThrough"
+            EphemeralStorage: 
+                Size: 512
+
+    LambdaFunction3:
+        DeletionPolicy: "Delete"
+        Type: "AWS::Lambda::Function"
+        Properties:
+            Description: ""
+            FunctionName: !Sub "$to2-jwks-proxy"
+            Handler: "lambda_function.lambda_handler"
+            Architectures: 
+              - "x86_64"
+            Code: 
+                S3Bucket: "awslambda-ap-ne-2-tasks"
+                S3Key: !Sub "/snapshots/416536687282/$to2-jwks-proxy-c5765ac0-0569-4e14-9186-fd910341df22"
+                S3ObjectVersion: "Q.bnsHGc5duHQLLg0nftXSukQtLEEoif"
+            MemorySize: 128
+            Role: !Sub "arn:aws:iam::416536687282:role/service-role/$to2-jwks-proxy-role-mrbf6z1o"
+            Runtime: "python3.11"
+            Timeout: 3
+            TracingConfig: 
+                Mode: "PassThrough"
+            EphemeralStorage: 
+                Size: 512

@@ -1,0 +1,35 @@
+    S3Bucket:
+        DeletionPolicy: "Delete"
+        Type: "AWS::S3::Bucket"
+        Properties:
+            BucketName: !Sub "$to2-chat"
+            BucketEncryption: 
+                ServerSideEncryptionConfiguration: 
+                  - 
+                    ServerSideEncryptionByDefault: 
+                        SSEAlgorithm: "AES256"
+                    BucketKeyEnabled: true
+            CorsConfiguration: 
+                CorsRules: 
+                  - 
+                    AllowedHeaders: 
+                      - "*"
+                    AllowedMethods: 
+                      - "GET"
+                      - "PUT"
+                      - "POST"
+                      - "HEAD"
+                    AllowedOrigins: 
+                      - "*"
+            WebsiteConfiguration: 
+                IndexDocument: "index.html"
+                ErrorDocument: "index.html"
+            OwnershipControls: 
+                Rules: 
+                  - 
+                    ObjectOwnership: "BucketOwnerPreferred"
+            PublicAccessBlockConfiguration: 
+                BlockPublicAcls: false
+                BlockPublicPolicy: false
+                IgnorePublicAcls: false
+                RestrictPublicBuckets: false

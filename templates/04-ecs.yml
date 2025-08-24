@@ -1,0 +1,82 @@
+    # ECS Cluster
+    ECSCluster:
+        DeletionPolicy: "Delete"
+        Type: "AWS::ECS::Cluster"
+        Properties:
+            ClusterName: !Sub "$to2-ecs-cluster"
+            CapacityProviders: 
+              - "FARGATE"
+              - "FARGATE_SPOT"
+
+    # ECS Service
+    ECSService:
+        DeletionPolicy: "Delete"
+        Type: "AWS::ECS::Service"
+        Properties:
+            ServiceName: !Sub "$to2-task-definition-service-ovxd3686"
+            Cluster: !GetAtt ECSCluster.Arn
+            LoadBalancers: 
+              - 
+                TargetGroupArn: !Sub "arn:aws:elasticloadbalancing:${AWS::Region}:416536687282:targetgroup/$to2-target-group/58b0509deb0c10d4"
+                ContainerName: !Sub "$to2-first"
+                ContainerPort: 8080
+            DesiredCount: 1
+            PlatformVersion: "1.4.0"
+            TaskDefinition: !Ref ECSTaskDefinition
+            DeploymentConfiguration: 
+                MaximumPercent: 200
+                MinimumHealthyPercent: 100
+                DeploymentCircuitBreaker: 
+                    Enable: true
+                    Rollback: true
+            Role: "arn:aws:iam::416536687282:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
+            NetworkConfiguration: 
+                AwsvpcConfiguration: 
+                    AssignPublicIp: "DISABLED"
+                    SecurityGroups: 
+                      - !Ref EC2SecurityGroup2
+                    Subnets: 
+                      - !Ref EC2Subnet3
+                      - !Ref EC2Subnet4
+            HealthCheckGracePeriodSeconds: 0
+            SchedulingStrategy: "REPLICA"
+            DeploymentController: 
+                Type: "ECS"
+            CapacityProviderStrategy: 
+              - 
+                CapacityProvider: "FARGATE"
+                Weight: 1
+                Base: 0
+
+    # ECS Task Definition
+    ECSTaskDefinition:
+        DeletionPolicy: "Delete"
+        Type: "AWS::ECS::TaskDefinition"
+        Properties:
+            ContainerDefinitions: 
+              - 
+                Essential: true
+                Image: !Sub "416536687282.dkr.ecr.${AWS::Region}.amazonaws.com/$to2:latest"
+                LogConfiguration: 
+                    LogDriver: "awslogs"
+                    Options: 
+                        awslogs-group: !Sub "/ecs/$to2-task-definition"
+                        mode: "non-blocking"
+                        awslogs-create-group: "true"
+                        max-buffer-size: "25m"
+                        awslogs-region: !Ref AWS::Region
+                        awslogs-stream-prefix: "ecs"
+                Name: !Sub "$to2-first"
+                PortMappings: 
+                  - 
+                    ContainerPort: 8080
+                    HostPort: 8080
+                    Protocol: "tcp"
+            Family: !Sub "$to2-task-definition"
+            TaskRoleArn: "arn:aws:iam::416536687282:role/ecsTaskExecutionRole"
+            ExecutionRoleArn: "arn:aws:iam::416536687282:role/ecsTaskExecutionRole"
+            NetworkMode: "awsvpc"
+            RequiresCompatibilities: 
+              - "FARGATE"
+            Cpu: "512"
+            Memory: "1024"

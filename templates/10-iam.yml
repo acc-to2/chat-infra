@@ -1,0 +1,46 @@
+    IAMGroup:
+        DeletionPolicy: "Delete"
+        Type: "AWS::IAM::Group"
+        Properties:
+            Path: "/"
+            GroupName: "acc_3rd"
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AdministratorAccess"
+
+    IAMUser:
+        DeletionPolicy: "Delete"
+        Type: "AWS::IAM::User"
+        Properties:
+            Path: "/"
+            UserName: "2171046"
+            Groups: 
+              - !Ref IAMGroup
+            Tags: 
+              - 
+                Key: "AKIAWB64FOKZMLKMZPEN"
+                Value: !Sub "$to2-share"
+              - 
+                Key: "AKIAWB64FOKZN4FEVAUS"
+                Value: "aws-cli"
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/IAMUserChangePassword"
+
+    IAMUser2:
+        DeletionPolicy: "Delete"
+        Type: "AWS::IAM::User"
+        Properties:
+            Path: "/"
+            UserName: "To2-backend"
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/AdministratorAccess"
+              - "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+
+    IAMUser3:
+        DeletionPolicy: "Delete"
+        Type: "AWS::IAM::User"
+        Properties:
+            Path: "/"
+            UserName: "To2-frontend"
+            ManagedPolicyArns: 
+              - "arn:aws:iam::aws:policy/CloudFrontFullAccess"
+              - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
