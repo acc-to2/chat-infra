@@ -1,0 +1,33 @@
+# dynamodb.yml
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "to2 DynamoDB 테이블 스택"
+
+Parameters:
+  TableName:
+    Type: String
+    Description: "생성할 DynamoDB 테이블 이름"
+
+Resources:
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref TableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SK
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SK
+          KeyType: RANGE
+
+Outputs:
+  TableName:
+    Description: "생성된 DynamoDB 테이블 이름"
+    Value: !Ref DynamoDBTable
+  TableArn:
+    Description: "생성된 DynamoDB 테이블 ARN"
+    Value: !GetAtt DynamoDBTable.Arn

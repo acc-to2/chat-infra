@@ -1,0 +1,118 @@
+# s3-cloudfront.yml
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "to2 S3 버킷 + CloudFront 배포 스택 (파라미터화된 설정)"
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: "생성할 S3 버킷 이름"
+  WebsiteIndexDocument:
+    Type: String
+    Description: "S3 WebsiteIndexDocument"
+    Default: "index.html"
+  WebsiteErrorDocument:
+    Type: String
+    Description: "S3 WebsiteErrorDocument"
+    Default: "index.html"
+  AliasDomain:
+    Type: String
+    Description: "CloudFront에 추가할 CNAME (예: to2-chat.shop)"
+  CertificateArn:
+    Type: String
+    Description: "us-east-1 리전 ACM 인증서 ARN"
+  PriceClass:
+    Type: String
+    Description: "CloudFront PriceClass"
+    Default: "PriceClass_All"
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+            BucketKeyEnabled: true
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders: ["*"]
+            AllowedMethods: ["GET","PUT","POST","HEAD"]
+            AllowedOrigins: ["*"]
+      WebsiteConfiguration:
+        IndexDocument: !Ref WebsiteIndexDocument
+        ErrorDocument: !Ref WebsiteErrorDocument
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: "BucketOwnerPreferred"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+
+  S3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref S3Bucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: "PublicReadGetObject"
+            Effect: "Allow"
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${BucketName}/*"
+
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases: [ !Ref AliasDomain ]
+        Origins:
+          - Id: !Sub "${BucketName}-origin"
+            DomainName: !Sub "${BucketName}.s3-website-us-east-1.amazonaws.com"
+            OriginPath: ""
+            ConnectionAttempts: 3
+            ConnectionTimeout: 10
+            CustomOriginConfig:
+              HTTPPort: 80
+              HTTPSPort: 443
+              OriginProtocolPolicy: "http-only"
+              OriginSSLProtocols: ["TLSv1","TLSv1.1","TLSv1.2","SSLv3"]
+              OriginReadTimeout: 30
+              OriginKeepaliveTimeout: 5
+        DefaultCacheBehavior:
+          TargetOriginId: !Sub "${BucketName}-origin"
+          ViewerProtocolPolicy: "redirect-to-https"
+          AllowedMethods: ["GET","HEAD","OPTIONS","PUT","POST","PATCH","DELETE"]
+          CachedMethods: ["GET","HEAD"]
+          Compress: true
+          CachePolicyId: "658327ea-f89d-4fab-a63d-7e88639e58f6"
+        CustomErrorResponses:
+          - ErrorCode: 403
+            ResponsePagePath: !Sub "/${WebsiteIndexDocument}"
+            ResponseCode: "200"
+            ErrorCachingMinTTL: 10
+          - ErrorCode: 404
+            ResponsePagePath: !Sub "/${WebsiteIndexDocument}"
+            ResponseCode: "200"
+            ErrorCachingMinTTL: 10
+        DefaultRootObject: ""
+        PriceClass: !Ref PriceClass
+        Enabled: true
+        HttpVersion: "http3"
+        IPV6Enabled: true
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: "sni-only"
+          MinimumProtocolVersion: "TLSv1.2_2021"
+
+Outputs:
+  BucketName:
+    Description: "생성된 S3 버킷 이름"
+    Value: !Ref S3Bucket
+  CloudFrontDomainName:
+    Description: "CloudFront 도메인 이름"
+    Value: !GetAtt CloudFrontDistribution.DomainName

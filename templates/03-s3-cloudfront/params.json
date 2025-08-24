@@ -1,0 +1,8 @@
+{
+  "BucketName": "to2-chat",
+  "WebsiteIndexDocument": "index.html",
+  "WebsiteErrorDocument": "index.html",
+  "AliasDomain": "to2-chat.shop",
+  "CertificateArn": "arn:aws:acm:us-east-1:123456789012:certificate/9f5d358a-1f35-4d7f-b3b5-26a41278fc79",
+  "PriceClass": "PriceClass_All"
+}

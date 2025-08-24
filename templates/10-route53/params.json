@@ -1,0 +1,13 @@
+{
+  "DomainName": "to2-chat.shop",
+  "CFDistributionDNSName": "d16dowdopolmpi.cloudfront.net",
+  "CFDistributionHostedZoneId": "Z2FDTNDATAQYW2",
+  "CFValidationRecordName": "_fcfd465c0a238312ee0a4868da852429.to2-chat.shop",
+  "CFValidationRecordValue": "_990bd4d227efda0d03f889cb7c3b2958.xlfgrmvvlj.acm-validations.aws",
+  "APIAlbDNSName": "dualstack.to2-alb-1131301188.ap-northeast-2.elb.amazonaws.com",
+  "APIAlbHostedZoneId": "ZWKZPGTI48KDX",
+  "APIValidationRecordName": "_22a07ae9619472d343c60841e6e1c053.api.to2-chat.shop",
+  "APIValidationRecordValue": "_be7a1ce16a2dd7dfd1dbb6fa5d13da9d.xlfgrmvvlj.acm-validations.aws",
+  "WWWValidationRecordName": "_307a34d57a35293abb45b9ae8654b1fb.www.to2-chat.shop",
+  "WWWValidationRecordValue": "_1dad81f684a8ec6e8521e52812222cec.xlfgrmvvlj.acm-validations.aws"
+}

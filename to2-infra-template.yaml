@@ -66,6 +66,34 @@ Resources:
       Tags:
         - Key: Name
           Value: to2-private-subnet-2
+  # Route Table
+  EC2RouteTable:
+      Type: "AWS::EC2::RouteTable"
+      Properties:
+          VpcId: "vpc-0c8493f4150a0df57"
+          Tags: 
+            - 
+              Key: "Name"
+              Value: "to2-private-rt"
+
+  EC2RouteTable2:
+      Type: "AWS::EC2::RouteTable"
+      Properties:
+          VpcId: "vpc-0c8493f4150a0df57"
+          Tags: 
+            - 
+              Key: "Name"
+              Value: "to2-public-rt"
+
+  EC2RouteTable3:
+      Type: "AWS::EC2::RouteTable"
+      Properties:
+          VpcId: "vpc-0c8493f4150a0df57"
+          Tags: 
+            - 
+              Key: "Name"
+              Value: "to2-vpc-rt"
+
 
   # Security Groups
   To2AlbSG:

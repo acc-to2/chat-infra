@@ -1,0 +1,103 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "to2 Route53 Hosted Zone 및 레코드셋 스택"
+
+Parameters:
+  DomainName:
+    Type: String
+    Description: "관리할 도메인 이름"
+  CFDistributionDNSName:
+    Type: String
+    Description: "CloudFront 배포 도메인 이름"
+  CFDistributionHostedZoneId:
+    Type: String
+    Description: "CloudFront 배포용 Hosted Zone ID"
+  CFValidationRecordName:
+    Type: String
+    Description: "CloudFront 인증서 검증을 위한 CNAME 레코드 이름"
+  CFValidationRecordValue:
+    Type: String
+    Description: "CloudFront 인증서 검증을 위한 CNAME 레코드 값"
+  APIAlbDNSName:
+    Type: String
+    Description: "API용 ALB 도메인 이름"
+  APIAlbHostedZoneId:
+    Type: String
+    Description: "API용 ALB Hosted Zone ID"
+  APIValidationRecordName:
+    Type: String
+    Description: "API 서브도메인 인증서 검증을 위한 CNAME 레코드 이름"
+  APIValidationRecordValue:
+    Type: String
+    Description: "API 서브도메인 인증서 검증을 위한 CNAME 레코드 값"
+  WWWValidationRecordName:
+    Type: String
+    Description: "www 서브도메인 인증서 검증을 위한 CNAME 레코드 이름"
+  WWWValidationRecordValue:
+    Type: String
+    Description: "www 서브도메인 인증서 검증을 위한 CNAME 레코드 값"
+
+Resources:
+  HostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: !Ref DomainName
+
+  RootAliasRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref DomainName
+      Type: A
+      AliasTarget:
+        DNSName: !Ref CFDistributionDNSName
+        HostedZoneId: !Ref CFDistributionHostedZoneId
+        EvaluateTargetHealth: false
+
+  CFValidationRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref CFValidationRecordName
+      Type: CNAME
+      TTL: 300
+      ResourceRecords:
+        - !Ref CFValidationRecordValue
+
+  APIAliasRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Sub "api.${DomainName}"
+      Type: A
+      AliasTarget:
+        DNSName: !Ref APIAlbDNSName
+        HostedZoneId: !Ref APIAlbHostedZoneId
+        EvaluateTargetHealth: true
+
+  APIValidationRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref APIValidationRecordName
+      Type: CNAME
+      TTL: 300
+      ResourceRecords:
+        - !Ref APIValidationRecordValue
+
+  WWWValidationRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref WWWValidationRecordName
+      Type: CNAME
+      TTL: 300
+      ResourceRecords:
+        - !Ref WWWValidationRecordValue
+
+Outputs:
+  HostedZoneId:
+    Description: "생성된 Hosted Zone ID"
+    Value: !Ref HostedZone
+  NameServers:
+    Description: "Route53 할당 네임서버 목록"
+    Value: !Join [",", !GetAtt HostedZone.NameServers]

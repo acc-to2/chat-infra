@@ -1,0 +1,12 @@
+{
+  "Region": "ap-northeast-2",
+  "VpcCidr": "10.22.0.0/16",
+  "PublicSubnetACidr": "10.22.1.0/24",
+  "PublicSubnetCCidr": "10.22.2.0/24",
+  "PrivateSubnetACidr": "10.22.101.0/24",
+  "PrivateSubnetCCidr": "10.22.102.0/24",
+  "AvailabilityZoneA": "ap-northeast-2a",
+  "AvailabilityZoneC": "ap-northeast-2c",
+  "DhcpOptionsId": "dopt-0ac4bc2f3a05d5ef1",
+  "PublicSubnetSecurityGroup": "sg-060cd048907161936"
+}
