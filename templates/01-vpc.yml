@@ -105,7 +105,7 @@
                 Key: "Name"
                 Value: !Sub "$to2-igw"
 
-    # Route Rables
+    # Route Tables
     EC2RouteTable:
         DeletionPolicy: "Delete"
         Type: "AWS::EC2::RouteTable"
