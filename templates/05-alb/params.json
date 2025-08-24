@@ -1,0 +1,30 @@
+[
+  {
+    "ParameterKey": "ProjectName",
+    "ParameterValue": "to2"
+  },
+  {
+    "ParameterKey": "VpcId",
+    "ParameterValue": "<VPC_ID_FROM_VPC_STACK>"
+  },
+  {
+    "ParameterKey": "PublicSubnets",
+    "ParameterValue": "<PUBLIC_SUBNETS_FROM_VPC_STACK>"
+  },
+  {
+    "ParameterKey": "AlbSecurityGroupId",
+    "ParameterValue": "<ALB_SG_ID_FROM_SG_STACK>"
+  },
+  {
+    "ParameterKey": "CertificateArn",
+    "ParameterValue": "<CERT_ARN_FROM_CERT_STACK>"
+  },
+  {
+    "ParameterKey": "ContainerPort",
+    "ParameterValue": "8080"
+  },
+  {
+    "ParameterKey": "HealthCheckPath",
+    "ParameterValue": "/"
+  }
+]

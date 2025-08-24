@@ -1,0 +1,30 @@
+[
+  {
+    "ParameterKey": "ProjectName",
+    "ParameterValue": "to2"
+  },
+  {
+    "ParameterKey": "PrivateSubnets",
+    "ParameterValue": "<PRIVATE_SUBNETS_FROM_VPC_STACK>"
+  },
+  {
+    "ParameterKey": "BrokerSecurityGroupId",
+    "ParameterValue": "<BROKER_SG_ID_FROM_SG_STACK>"
+  },
+  {
+    "ParameterKey": "BrokerUsername",
+    "ParameterValue": "admin"
+  },
+  {
+    "ParameterKey": "BrokerPassword",
+    "ParameterValue": "YourSecurePassword123!"
+  },
+  {
+    "ParameterKey": "HostInstanceType",
+    "ParameterValue": "mq.t3.micro"
+  },
+  {
+    "ParameterKey": "EngineVersion",
+    "ParameterValue": "3.11.20"
+  }
+]

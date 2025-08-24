@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "ProjectName",
+    "ParameterValue": "to2"
+  },
+  {
+    "ParameterKey": "VpcId",
+    "ParameterValue": "<VPC_ID_FROM_VPC_STACK>"
+  }
+]

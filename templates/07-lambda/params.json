@@ -1,0 +1,42 @@
+[
+  {
+    "ParameterKey": "ProjectName",
+    "ParameterValue": "to2"
+  },
+  {
+    "ParameterKey": "DynamoDbTableName",
+    "ParameterValue": "<DDB_TABLE_NAME_FROM_DDB_STACK>"
+  },
+  {
+    "ParameterKey": "CognitoUserPoolId",
+    "ParameterValue": "<COGNITO_USER_POOL_ID_FROM_COGNITO_STACK>"
+  },
+  {
+    "ParameterKey": "CodeS3Bucket",
+    "ParameterValue": "awslambda-ap-ne-2-tasks"
+  },
+  {
+    "ParameterKey": "UpdateUserLambdaS3Key",
+    "ParameterValue": "/snapshots/416536687282/to2-table-updateUser-7f1bd7e5-ee51-41d6-860e-0daf50aa410d"
+  },
+  {
+    "ParameterKey": "UpdateUserLambdaS3Version",
+    "ParameterValue": "x1FhPPKwR6hDhiCqmw_QBNs2wtKJDS5h"
+  },
+  {
+    "ParameterKey": "AccessTokenEmailLambdaS3Key",
+    "ParameterValue": "/snapshots/416536687282/to2-table-access-token-email-fb1d2afe-6edf-465b-bb9a-eb1889ab15ff"
+  },
+  {
+    "ParameterKey": "AccessTokenEmailLambdaS3Version",
+    "ParameterValue": "Nb_f47FrZjIJGAFprNuD5HrHbCqy7vZy"
+  },
+  {
+    "ParameterKey": "JwksProxyLambdaS3Key",
+    "ParameterValue": "/snapshots/416536687282/to2-table-jwks-proxy-c5765ac0-0569-4e14-9186-fd910341df22"
+  },
+  {
+    "ParameterKey": "JwksProxyLambdaS3Version",
+    "ParameterValue": "Q.bnsHGc5duHQLLg0nftXSukQtLEEoif"
+  }
+]

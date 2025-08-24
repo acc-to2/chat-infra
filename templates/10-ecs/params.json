@@ -1,0 +1,46 @@
+[
+  {
+    "ParameterKey": "ProjectName",
+    "ParameterValue": "to2"
+  },
+  {
+    "ParameterKey": "PrivateSubnets",
+    "ParameterValue": "<PRIVATE_SUBNETS_FROM_VPC_STACK>"
+  },
+  {
+    "ParameterKey": "EcsSecurityGroupId",
+    "ParameterValue": "<ECS_SG_ID_FROM_SG_STACK>"
+  },
+  {
+    "ParameterKey": "TargetGroupArn",
+    "ParameterValue": "<TARGET_GROUP_ARN_FROM_ALB_STACK>"
+  },
+  {
+    "ParameterKey": "TaskCpu",
+    "ParameterValue": "1024"
+  },
+  {
+    "ParameterKey": "TaskMemory",
+    "ParameterValue": "3072"
+  },
+  {
+    "ParameterKey": "ContainerPort",
+    "ParameterValue": "8080"
+  },
+  {
+    "ParameterKey": "DesiredCount",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "MinCapacity",
+    "ParameterValue": "1"
+  },
+  {
+    "ParameterKey": "MaxCapacity",
+    "ParameterValue": "4"
+  },
+  {
+    "ParameterKey": "ScalingTargetValue",
+    "ParameterValue": "50"
+  }
+]

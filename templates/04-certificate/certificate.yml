@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Passes the existing ACM Certificate ARN for use in other stacks.'
+
+Parameters:
+  CertificateArn:
+    Type: String
+    Description: 'ARN of the existing ACM certificate for the domain.'
+
+Outputs:
+  CertificateArn:
+    Description: 'The ACM certificate ARN.'
+    Value: !Ref CertificateArn
+    Export:
+      Name: !Sub "${AWS::StackName}-CertificateArn"

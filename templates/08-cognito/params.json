@@ -1,0 +1,14 @@
+[
+  {
+    "ParameterKey": "ProjectName",
+    "ParameterValue": "to2"
+  },
+  {
+    "ParameterKey": "CallbackURLs",
+    "ParameterValue": "https://to2-chat.com/callback"
+  },
+  {
+    "ParameterKey": "LogoutURLs",
+    "ParameterValue": "https://to2-chat.com/logout"
+  }
+]

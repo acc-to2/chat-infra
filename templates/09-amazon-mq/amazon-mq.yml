@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Parameterized Amazon MQ for RabbitMQ broker'
+
+Parameters:
+  ProjectName:
+    Type: String
+  PrivateSubnets:
+    Type: CommaDelimitedList
+  BrokerSecurityGroupId:
+    Type: AWS::EC2::SecurityGroup::Id
+  BrokerUsername:
+    Type: String
+    NoEcho: true
+  BrokerPassword:
+    Type: String
+    NoEcho: true
+  HostInstanceType:
+    Type: String
+  EngineVersion:
+    Type: String
+
+Resources:
+  AmazonMQBroker:
+    Type: AWS::AmazonMQ::Broker
+    Properties:
+      BrokerName: !Sub "${ProjectName}-rabbitmq-broker"
+      EngineType: RabbitMQ
+      EngineVersion: !Ref EngineVersion
+      HostInstanceType: !Ref HostInstanceType
+      PubliclyAccessible: false
+      DeploymentMode: SINGLE_INSTANCE
+      Users:
+        - Username: !Ref BrokerUsername
+          Password: !Ref BrokerPassword
+      SubnetIds: !Ref PrivateSubnets
+      SecurityGroups:
+        - !Ref BrokerSecurityGroupId
+      Tags:
+        - Key: Name
+          Value: !Sub "${ProjectName}-rabbitmq"
+
+Outputs:
+  BrokerId:
+    Value: !Ref AmazonMQBroker
+    Export:
+      Name: !Sub "${AWS::StackName}-BrokerId"
+  BrokerArn:
+    Value: !GetAtt AmazonMQBroker.Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-BrokerArn"

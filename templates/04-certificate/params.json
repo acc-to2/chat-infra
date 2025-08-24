@@ -1,0 +1,6 @@
+[
+  {
+    "ParameterKey": "CertificateArn",
+    "ParameterValue": "arn:aws:acm:ap-northeast-2:416536687282:certificate/72a35085-77a4-4282-ba23-36e9638ea1ad"
+  }
+]
